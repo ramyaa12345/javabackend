@@ -6,6 +6,4 @@ import org.springframework.stereotype.Component;
 @Component
 public interface HRRepository extends CrudRepository<HR,Long>{
 
-	
-
 }
