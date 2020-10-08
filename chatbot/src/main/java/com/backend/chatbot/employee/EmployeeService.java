@@ -7,5 +7,4 @@ public interface EmployeeService {
 	public Employee getEmployeeById(Long id);
 	public void saveOrUpdate(Employee e);
 	public Employee getByEmail(String email);
-
 }
