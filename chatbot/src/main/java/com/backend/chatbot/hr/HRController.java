@@ -3,13 +3,12 @@ package com.backend.chatbot.hr;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
 
 
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin()
 @RestController
 public class HRController {
 	@Autowired
@@ -28,6 +27,12 @@ public class HRController {
 	public HR getByEmail(@PathVariable String email) {
 		return es.getByEmail(email);
 		
+	}
+
+	@PostMapping("/respond")
+	public Boolean respond(@RequestBody ResponseToQuery responseToQuery) throws MessagingException {
+		return es.sendEmail(responseToQuery.getQuestion(), responseToQuery.getAnswer(), responseToQuery.getEmail(), responseToQuery.getQid());
+
 	}
 	
 	

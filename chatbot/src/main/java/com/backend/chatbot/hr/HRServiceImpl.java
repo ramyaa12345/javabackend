@@ -9,6 +9,9 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
+
+import com.backend.chatbot.query.QueryOfNJ;
+import com.backend.chatbot.query.QueryOfNjRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,8 @@ import org.springframework.stereotype.Service;
 public class HRServiceImpl implements HRService{
 	@Autowired
 	HRRepository er;
+	@Autowired
+	QueryOfNjRepository queryOfNjRepository;
 
 	@Override
 	public List<HR> getAllHRs() {
@@ -48,8 +53,8 @@ public class HRServiceImpl implements HRService{
 		return null;
 	}
 
-
-	public boolean sendEmail(String question, String answer, String email) throws MessagingException, AddressException {
+	@Override
+	public Boolean sendEmail(String question, String answer, String email, int id) throws MessagingException, AddressException {
 		try {
 			Properties props = new Properties();
 			props.put("mail.smtp.auth", "true");
@@ -69,7 +74,7 @@ public class HRServiceImpl implements HRService{
 			msg.setContent(answer, "text/html");
 			msg.setSentDate(new Date());
 			Transport.send(msg);
-
+			queryOfNjRepository.setTrue(id);
 			return true;
 		}
 		catch (Exception e){
@@ -77,8 +82,4 @@ public class HRServiceImpl implements HRService{
 		}
 	}
 }
-class ResponseToQuery{
-	String question;
-	String answer;
 
-}

@@ -28,4 +28,9 @@ public class QueryOfNjRepository {
         em.persist(queryOfNJ);
         return queryOfNJ;
     }
+    public void setTrue(int id){
+        QueryOfNJ queryOfNJ = em.find(QueryOfNJ.class, id);
+        queryOfNJ.setIsAnswerd(Boolean.TRUE);
+        em.persist(queryOfNJ);
+    }
 }

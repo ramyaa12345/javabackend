@@ -1,8 +1,6 @@
 package com.backend.chatbot.hr;
 
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.mail.MessagingException;
 
@@ -16,7 +14,7 @@ public class HRServiceImplTest {
         String query  = "what is name?";
         String answer = "name is nikhil";
         String email = "sainikhil027@gmail.com";
-        assertTrue(hrServiceImpl.sendEmail(query, answer, email));
+        assertTrue(hrServiceImpl.sendEmail(query, answer, email, 2));
 //        assertFalse(hrServiceImpl.sendEmail(query, answer, "sainikhil818134"));
     }
 }
